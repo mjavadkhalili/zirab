@@ -15,8 +15,13 @@ namespace FTSS.Models.Database
             }
 
         }
-        public class User
+        public class WAPIUserToken
         {
+            public string WAPIToken
+            {
+                get;
+                set;
+            }
             public string UserToken
             {
                 get;
@@ -24,7 +29,16 @@ namespace FTSS.Models.Database
             }
 
         }
+        public class User
+		{
+            public string UserToken
+            {
+                get;
+                set;
+            }
+        }
 
-       
+
+
     }
 }

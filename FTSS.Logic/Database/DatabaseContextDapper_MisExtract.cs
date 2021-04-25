@@ -34,16 +34,19 @@ namespace FTSS.Logic.Database
             _SP_APILog_Insert = new DP.DapperORM.BaseSP<SP_APILog_Insert.Inputs, SP_APILog_Insert.Outputs>("SP_APILog_Insert", executer);
           
         }
-
-
         #region SPs
         public DBResult SP_APILog_Insert(SP_APILog_Insert.Inputs inputs)
         {
             var rst = _SP_APILog_Insert.Single(inputs);
             return rst;
         }
+        public DBResult SP_AmalkardKarkhanehStop5(SP_APILog_Insert.Inputs inputs)
+        {
+            var rst = _SP_APILog_Insert.Single(inputs);
+            return rst;
+        }
 
-    
+
         #endregion SPs
     }
 }

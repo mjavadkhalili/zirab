@@ -13,8 +13,4 @@
     <None Remove="Database\Views\**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Database\StoredProcedures\MisExtract\" />
-  </ItemGroup>
-
 </Project>

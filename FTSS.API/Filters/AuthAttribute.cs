@@ -40,15 +40,15 @@ namespace FTSS.API.Filters
         /// <returns></returns>
         private bool IsAccessToCurrentRequest(AuthorizationFilterContext context)
         {
-            var data = new Models.Database.StoredProcedures.SP_User_AccessToAPI.Inputs()
+            var data = new Models.Database.StoredProcedures.Fapubs.dbo.SP_CheckToken.Inputs()
             {
                 UserToken = context.HttpContext.User.GetToken(),
-                APIAddress = _apiAddress
+                WAPIToken = _apiAddress
             };
 
             //Get default ORM
-            var dbCTX = context.HttpContext.RequestServices.GetService(typeof(FTSS.Logic.Database.IDatabaseContext_MisExtract)) 
-                            as FTSS.Logic.Database.IDatabaseContext_MisExtract;
+            var dbCTX = context.HttpContext.RequestServices.GetService(typeof(FTSS.Logic.Database.IDatabaseContextDapper_Fapubs)) 
+                            as FTSS.Logic.Database.IDatabaseContextDapper_Fapubs;
 
             //Check user authorization
             var rst = Logic.Security.Common.IsUserAccessToAPI(dbCTX, data);

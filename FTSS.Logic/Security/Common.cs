@@ -53,27 +53,24 @@ namespace FTSS.Logic.Security
         /// <param name="dbCTX">Default ORM</param>
         /// <param name="data"></param>
         /// <returns></returns>
-        public static bool IsUserAccessToAPI(Database.IDatabaseContext_MisExtract dbCTX,
-            Models.Database.StoredProcedures.SP_User_AccessToAPI.Inputs data)
+        public static bool IsUserAccessToAPI(Database.IDatabaseContextDapper_Fapubs dbCTX,
+            Models.Database.StoredProcedures.Fapubs.dbo.SP_CheckToken.Inputs data)
         {
             if (dbCTX == null)
-                throw new ArgumentNullException("In IsUserAccessToAPI the dbCTX could not be null.");
-
-            if (data == null)
-                throw new ArgumentNullException("In IsUserAccessToAPI the data could not be null.");
-
+                throw new ArgumentNullException("شی ارسال شده خالی است!");
             //Calling sp
-            var rst = dbCTX.SP_User_AccessToAPI(data);
+            var rst = dbCTX.SP_Check_Token(data);
 
             //Check result
             if (rst == null || rst.StatusCode != 200 || !string.IsNullOrEmpty(rst.ErrorMessage) || rst.Data == null)
                 return false;
 
-            if (!(rst.Data is Models.Database.StoredProcedures.SP_User_AccessToAPI.Outputs))
+            if (!(rst.Data is Models.Database.StoredProcedures.Fapubs.dbo.SP_CheckToken.Outputs))
                 return false;
-
-            var result = rst.Data as Models.Database.StoredProcedures.SP_User_AccessToAPI.Outputs;
-            return result.Result;
+            var result = rst.Data as Models.Database.StoredProcedures.Fapubs.dbo.SP_CheckToken.Outputs;
+            if (result.PersonelId == null || result.WAPIUserId == null)
+                return false;
+            return true;
         }
     }
 }
